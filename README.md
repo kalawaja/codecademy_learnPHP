@@ -92,7 +92,7 @@ Unlike many other languages, PHP is not always case-sensitive, so `Echo` is a va
 > <?php
 > echo "I love PHP!";
 > ```
-> 1. We’ve included some sample code - can you change it so that I love PHP! is printed to the terminal instead of Hello, World!?
+> - We’ve included some sample code - can you change it so that I love PHP! is printed to the terminal instead of Hello, World!?
 
 ```php
 <?php
@@ -127,7 +127,7 @@ echo "Hello, World!";
 ```
 
 > *Instructions*
-> 1. This PHP code includes both single and multi line comments. Take a moment to predict what will show up in the terminal and what will not. When you’re ready run the code to see if you were right.
+> - This PHP code includes both single and multi line comments. Take a moment to predict what will show up in the terminal and what will not. When you’re ready run the code to see if you were right.
 
 ```php
 #index.php
@@ -153,3 +153,441 @@ In the next lesson, you’ll start creating your own PHP code. Take a second and
 - Whitespace is generally ignored when executing PHP code.
 - Keywords are not case sensitive in PHP. As a convention, use the standard casing.
 - Single line comments are made in PHP using `#` or `//`. Multi-line comments are placed between `/*` and `*/`.
+
+### 2. Learn PHP Variables
+#### 2.1 PHP Strings and Variables
+> **2.1.1 Strings**
+
+![php-strings-variables-1](https://content.codecademy.com/courses/php-strings-variables/PHP_m2l1e1.svg)
+
+In everyday conversation, we use the word data to refer to any sort of information. This information is often a list of numbers, like a company’s monthly expenses or statistics about an athlete’s performance. However, in programming, data means something very specific. It’s still information, but that information takes the form of a few specific types.
+
+The PHP language has different ways of handling different types of data. Which actions the computer can perform and how the computer stores the data in memory will vary based on the type. In this lesson, we’ll be learning about the *string* data type.
+
+Strings are words or pieces of text that the computer treats as a single item. A string is a sequence of characters. It can be any length and contain any letters, numbers, symbols, or spaces surrounded by quotation marks.
+
+```php
+echo "My first string"; // Prints: My first string
+```
+
+It’s important to distinguish between strings and the rest of the code in a PHP program. Every part of a program is text, but strings are the parts we intend to keep as data—not as instructions to be executed by computer. In this lesson we’re going to focus on strings wrapped in double quotation marks (if you’re curious, you can check out [the official PHP documentation](http://php.net/manual/en/language.types.string.php) to see other types of PHP strings).
+
+In later lessons, we’ll be using PHP to create custom HTML documents enabling dynamic web pages. As we learn the basics, however, we’ll be writing simple PHP only programs that run in the terminal.
+
+Let’s make some strings!
+
+> *Instructions*
+> - Let’s start with [the classic](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program). Use the `echo` keyword to print `Hello, World!`. <br>
+You should always end a PHP statement with a semicolon.
+
+```php
+#index.php
+<?php
+// Write your code below:
+  echo "Hello, World!";
+```
+
+> **2.1.2 Escape Sequences**
+
+We use quotation marks to indicate the start and end of a string. The quotation marks tell the computer that we want everything inside them to be treated as a single piece of data. But how do we include quotation marks inside a string?
+
+Consider the following string: `"She said "hi" to the dog."`
+
+In the code above, the quotes around “hi” are intended to be part of the string, but the computer will actually see two strings `"She said "` and `" to the dog."` with `hi` in between. Since `hi` won’t be recognized as valid PHP it will result in an error:
+
+```php
+echo "She said "hi" to the dog."; //syntax error, unexpected 'hi' (T_STRING)
+```
+
+In order to indicate which quotation marks the computer should view as instructions vs which it should view as simply characters, PHP allows for escape sequences. An escape sequence usually consists of a backslash (`\`) immediately followed by another character.
+
+```php
+echo "She said \"hi\" to the dog."; // Prints: She said "hi" to the dog.
+```
+
+Quotation marks aren’t the only symbol requiring an escape sequence. When we print multiple strings, PHP will print them to the same line by default:
+
+```php
+echo "1. Go to gym";
+echo "2. Cook dinner"; 
+```
+
+The code above will output `1. Go to gym2. Cook dinner.` To print the second string on a new line, we can use the newline escape sequence (`\n`):
+
+```php
+echo "1. Go to gym";
+echo "\n2. Cook dinner"; 
+/* Prints
+1. Go to gym
+2. Cook dinner
+*/
+```
+
+You don’t need to worry about other escape sequences yet, but if you’d like to see the full list you can find one in [the PHP documentation](http://php.net/manual/en/language.types.string.php#language.types.string.syntax.double).
+
+Let’s practice!
+
+> *Instructions*
+> - Let’s make a to-do list for you. Use `echo` to print a string to the console in the following format: `1. [thing you have to do].` For example, here’s ours: `1. Teach PHP`.
+
+```php
+#index.php
+<?php
+// Write your code below:
+echo "1. [thing you have to do]";
+```
+
+> *Instructions*
+> - Let’s create a new `echo` statement for the next item on our to-do list. <br>
+> By default, this second statement would print on the same line as the first… Start this second string with the escape sequence for a new line character. Next, continue the string in the same format as before: `2. [Another thing to do]`.
+
+```php
+#index.php
+<?php
+// Write your code below:
+echo "1. [thing you have to do]";
+echo "\n2. [Another thing to do]";
+```
+
+> *Instructions*
+> - Let’s throw a third thing on the list. This time, let’s mix it up. Include something inside your string wrapped in double quotes. For example, here’s ours `3. Learn to have "fun"`.
+
+```php
+#index.php
+<?php
+// Write your code below:
+echo "1. [thing you have to do]";
+echo "\n2. [Another thing to do]";
+echo "\n3. Learn to have \"fun\"";
+```
+
+> **2.1.3 String Concatenation**
+
+It can be useful to combine two strings together. This process is called *string concatenation*, and we can use the concatenation operator (`.`) to do this.
+
+An *operator* is a character that performs a task in our code. The computer will take the string to the left of the concatenation operator, combine it with the string to the right, and return the resulting single string. Let’s see an example of string concatenation:
+
+```php
+echo "one" . "two"; // Prints: onetwo
+```
+
+Notice how the string “onetwo” was printed. The computer won’t make any assumptions for us—it will combine the strings exactly as they are without adding any spaces or line-breaks. If we want spaces, we’ll have to add any spaces we want ourselves. Here we added a space to the string `"one "`:
+
+```php
+echo "one " . "two"; // Prints: one two
+```
+
+We can also combine, or chain, our operations to get a final result:
+
+```php
+echo "one" . " " . "two" . " " . "three"; // Prints: one two three
+```
+
+The concatenation operator takes two strings (the *operands*) and produces a string as a result (the return value). As we delve deeper into PHP, we’ll learn about other kinds of operators. Most will take one or two operands, but there’s even one that takes three.
+
+Let’s join some strings together!
+
+> *Instructions*
+> - Use `echo` to print the string `"Code"` concatenated to the string `"cademy"`.
+
+```php
+#index.php
+<?php
+// Write your code below:   
+echo "Code"."cademy";
+```
+
+> *Instructions*
+> - We want to learn a little more about you. Uncomment the line of code that starts with `echo "\nMy name is:"` and concatenate the given string with a string containing your name. Include a space after the colon without editing the string we provided.
+
+```php
+#index.php
+<?php
+// Write your code below:   
+echo "Code"."cademy";
+
+echo "\nMy name is:" . " " ."Ramazan İlter";
+```
+
+> *Instructions*
+> - Use `echo` to print a final portmanteau by concatenating these four strings `"\n"`, `"tur"`, `"duck"`, and `"en"`. Make sure to include a semicolon after the statement.
+
+```php
+#index.php
+<?php
+// Write your code below:   
+echo "Code"."cademy";
+
+echo "\nMy name is:" . " " ."Ramazan İlter";
+
+echo "\n"."tur"."duck"."en";
+```
+
+> **2.1.4 Variables**
+
+![php-strings-and-variables-2](https://content.codecademy.com/courses/php-strings-variables/PHP_m2l1e4m.svg)
+
+Let’s say I have a really long string in my program, and I’m going to need to use it multiple times. Do I have to type the string out every time I need to use it? The answer is “no”. Variables are a fundamental programming concept designed to address this concern. With variables, we store values so that we can easily reuse them throughout a program.
+
+Before we can use variables in our code, we need to declare and assign them.
+
+Declaring a variable is the process of reserving a word, the *variable name*, which we’ll be able to refer to in our code. It’s good practice to name the variable in a way that describes the data it holds.
+
+*Assignment* is the process of associating that variable name with a specific value so that everytime we use the variable’s name the computer will grab that value.
+
+![php-strings-variables-3](https://content.codecademy.com/courses/php-strings-variables/PHP_m2l1e4n.gif)
+
+> **2.1.5 Creating Variables**
+
+Let’s look at an example of creating a variable:
+
+```php
+$my_name = "Aisle Nevertell";
+```
+
+In the code above, we’re actually doing two things with a single statement: we’re *declaring* a new variable by giving it the name `my_name`. We’re also assigning it the value `"Aisle Nevertell"`. The variable `$my_name` now holds the value `"Aisle Nevertell"`.
+
+To declare a variable we use the dollar sign character (`$`) followed by our chosen variable name. The dollar sign is known as a *sigil*; it’s a character that allows the computer to see quickly that something is a variable.
+
+To assign it a value we use another operator: the assignment operator (`=`) followed by the value we’re assigning to the variable.
+
+Though it can occasionally be useful to separate these actions, we’ll most often be declaring and assigning variables at the same time.
+
+![php-strings-variables-4](https://content.codecademy.com/courses/php-strings-variables/PHP_m2l1e5.svg)
+
+In PHP, variables names can contain numbers, letters, and underscores (`_`), but they have to start with either a letter or an underscore. Variable names are case sensitive, meaning that PHP will treat the variables `$my_example` and `$My_example` as two different variables.
+
+One common convention when naming PHP variables is to use an underscore between words on variable names with more than one word in their name. This is known as *snake case*:
+
+```php
+$mood = ":)";
+$favorite_food = "Red curry with eggplant";
+```
+
+Let’s create some variables!
+
+> *Instructions*
+> - Create a variable and assign to it a string value. You can give the variable any valid name you’d like and assign a string containing anything you want. End the statement with a semicolon.
+
+```php
+#index.php
+<?php
+// Write your code below:
+  
+$silly = "without common sense, absurd, ridiculous";
+```
+
+> *Instructions*
+> - Declare a variable `$biography` and assign to it a string that starts with a new line character and contains a sentence or two about you.
+
+```php
+#index.php
+<?php
+// Write your code below:
+  
+$silly = "without common sense, absurd, ridiculous";
+
+$biography="\nMy name is Ramazan. I am learning PHP Software Language";
+```
+
+> *Instructions*
+> - Create a variable `$favorite_food` and assign to it the string `"\n"`, `"tur"`, `"duck"`, and `"en"` concatenated together.
+
+```php
+#index.php
+<?php
+// Write your code below:
+  
+$silly = "without common sense, absurd, ridiculous";
+
+$biography="\nMy name is Ramazan. I am learning PHP Software Language";
+
+$favorite_food="\n"."tur"."duck"."en";
+```
+
+> **2.1.6 Using Variables**
+
+Once we’ve declared a variable and assigned a value to it, we can use it as many times as we want. We refer to a variable by using the dollar sign followed by the variable’s name.
+
+```php
+$favorite_food = "Red curry with eggplant, green beans, and peanuts";
+echo $favorite_food; 
+// Prints: Red curry with eggplant, green beans, and peanuts
+```
+
+Except during assignment, whenever the computer sees a variable in your code, it replaces the variable with the value assigned to that variable.
+
+```php
+$dog_name = "Tadpole";
+echo $dog_name; 
+// Prints: Tadpole
+```
+
+Since the computer treats a variable just as if it were the value it holds, this means we can do operations on variables just as we would with any value of that type.
+
+```php
+$dog_name = "Tadpole";
+echo "My dog is named " . $dog_name; 
+// Prints: My dog is named Tadpole
+```
+
+In the code above, we concatenated the string `"My dog is named "` to the value held by the `$dog_name` variable (`"Tadpole"`). Let’s look at another example that uses multiple variables:
+
+```php
+$dog_name = "Tadpole";
+$favorite_food = "salmon";
+$color = "brown";
+ 
+echo "I have a " . $color . " dog named " . $dog_name . " and her favorite food is " . $favorite_food . ".";
+// Prints: I have a brown dog named Tadpole and her favorite food is salmon.
+```
+
+Let’s use some variables!
+
+> *Instructions*
+> - You’re going to create a couple variables. The variable, `$name`, should be assigned your name as a string. The second, `$language`, should be assigned a string value representing a language you’re learning.
+
+```php
+#index.php
+<?php
+// Write your code below:
+$name = "Ramazan";
+$language = "PHP";
+```
+
+> *Instructions*
+> - Use `echo` to print any string you’d like with the `$name` variable concatenated to it.
+
+```php
+#index.php
+<?php
+// Write your code below:
+$name = "Ramazan";
+$language = "PHP";
+  
+echo "Sometimes ".$name." is"." learning ".$language.".";
+```
+
+> *Instructions*
+> - Use `echo` to print a string starting with a newline (`\n`) with `$language` variable concatenated to it.
+
+```php
+#index.php
+<?php
+// Write your code below:
+$name = "Ramazan";
+$language = "PHP";
+  
+echo "Sometimes ".$name." is"." learning ".$language.".";
+
+echo "\nSometimes\n".$name."\nis"."\nlearning\n".$language."\n.";
+```
+
+> **2.1.7 Variable Parsing**
+
+In the last exercise, we saw how concatenating a number of strings and string variables got annoying. There’s an easier way!
+
+PHP strings allow us to place variables directly into double quoted strings. These variables will be *parsed* which means the computer will read the variables as the value they hold rather than see them as just a sequence of characters.
+
+```php
+$dog_name = "Tadpole";
+$favorite_food = "salmon";
+$color = "brown";
+
+echo "I have a $color dog named $dog_name and her favorite food is $favorite_food.";
+// Prints: I have a brown dog named Tadpole and her favorite food is salmon.
+```
+
+PHP string parsing is incredibly useful. Whenever PHP sees a dollar sign (`$`) inside a string it will assume all the characters next to it (until it reaches a character that couldn’t be included in a variable name) are a part of the variable name.
+
+Sometimes this can get complicated. Consider the following example:
+
+```php
+$toy = "frisbee";
+echo "Alex likes playing with $toys";
+```
+
+The code above will cause an error. Why? The computer was looking for a variable `$toys` and couldn’t find one.
+
+Fear not! PHP allows us to specifically indicate the variable name by wrapping it in curly braces to avoid any confusion. We’ll include the dollar sign followed by the variable name wrapped in curly braces:
+
+```php
+$dog_name = "Tadpole";
+$favorite_food = "treat";
+$color = "brown";
+ 
+echo "I have a ${color}ish dog named $dog_name and her favorite food is ${favorite_food}s.";
+// Prints: I have a brownish dog named Tadpole and her favorite food is treats.
+```
+
+Let’s have PHP do some variable parsing for us!
+
+> *Instructions*
+> ```php
+> #index.php
+> <?php
+> // Fill in the blanks in the code below:
+>   $noun = "___";
+>   $adjective = "___";
+>   $verb = "___";
+> ```
+> - We’re going to write a silly sentence PHP program. There are a number of variables assigned the string ‘___’. Replace each of them with words of the designated type.
+
+```php
+#index.php
+<?php
+// Fill in the blanks in the code below:
+  $noun = "helicopter";
+  $adjective = "powerful";
+  $verb = "scream";
+```
+
+> *Instructions*
+> ```php
+> #index.php
+> <?php
+>   echo "The world's most beloved ___ was very ___ and loved to ___ every single day.";
+> ```
+> - Beneath the three variables, there’s an `echo` statement with three blanks (___) in it. Replace those blanks with the three variables (in the order they were declared).
+
+```php
+#index.php
+<?php
+// Fill in the blanks in the code below:
+  $noun = "helicopter";
+  $adjective = "powerful";
+  $verb = "scream";
+
+  echo "The world's most beloved $noun was very $adjective and loved to $verb every single day.";
+```
+
+> *Instructions*
+> ```php
+> #index.php
+> <?php  
+>   //Fix the code below and uncomment it:
+> 
+>  // echo "\nI have always been obsessed with > $nouns. I'm $adjectiveish. I'm always > $verbing.";
+> ```
+> - At the end of the program, there’s a commented out line of code. We commented it out because it wasn’t working properly. Fix the line of code and uncomment it.
+
+```php
+#index.php
+<?php
+// Fill in the blanks in the code below:
+  $noun = "helicopter";
+  $adjective = "powerful";
+  $verb = "scream";
+
+  echo "The world's most beloved $noun was very $adjective and loved to $verb every single day.";
+
+
+//Fix the code below and uncomment it:
+
+ echo "\nI have always been obsessed with ${noun}s. I'm ${adjective}ish. I'm always ${verb}ing.";
+```
+
+> **2.1.8 Variable Variable Reassignment**
+
+## ***(To be continued...)***
+---
